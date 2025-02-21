@@ -1,15 +1,17 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./mongodb');
+const routes = require('./routes');
+dotenv.config();
 const app = express();
-const connectDB = require('./mongodb.js');
-
-const PORT = process.env.PORT || 3000;
 
 connectDB();
 
-app.get('/ping', (req, res) => {
-    res.send('hi');
-});
 
+
+app.use(express.json());
+app.use('/api', routes);
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on ${PORT}`);
 });

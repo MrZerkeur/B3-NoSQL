@@ -1,8 +1,8 @@
-FROM node:20
-WORKDIR /var/app
-COPY package.json package-lock.json /var/app/
+FROM node:latest
+WORKDIR /app
+COPY package.json /app
 RUN npm install
 
-COPY . /var/app/
+COPY . /app
 
 CMD ["npm", "run", "dev"]
